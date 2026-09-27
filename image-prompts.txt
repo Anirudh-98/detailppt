@@ -1,0 +1,116 @@
+DETAILRESUME DECK — IMAGE PROMPTS
+=================================
+
+How to use
+----------
+1. Generate each image with the prompt below (Midjourney, DALL·E, Imagen, Flux, Firefly, etc.).
+2. Save it into  public/images/  using the suggested file name.
+3. Set the path in  src/deck.config.ts  → images, e.g.  arjunAvatar: '/images/arjun.jpg'
+   Any slot left as '' keeps showing the dashed placeholder.
+
+Brand colours to mention if your tool supports it: primary blue #0665FE, deep blue #0A3FDF,
+off-white #F6F6F4, charcoal #3A3A3A. Keep images clean, modern and uncluttered — the deck
+uses lots of white space and a single bright blue accent.
+
+
+-----------------------------------------------------------------------------------------
+1) ARJUN — STUDENT PORTRAIT
+   Slide 6 "Meet Arjun"  ·  config key: arjunAvatar  ·  file: arjun.jpg
+   Shown as a small circle (150 px) — square 1:1 image, face centred.
+-----------------------------------------------------------------------------------------
+
+Prompt:
+Realistic head-and-shoulders portrait of a 21-year-old Indian male final-year computer
+science student, friendly confident half-smile, short neat black hair, wearing a plain
+navy crew-neck t-shirt, standing on a modern university campus with softly blurred
+glass buildings and greenery behind him, natural soft daylight, shallow depth of field,
+shot on an 85mm lens at f/1.8, true-to-life skin texture, subtle cool blue colour grade,
+editorial photography, face centred in frame, square 1:1 composition.
+
+Negative prompt (if supported):
+cartoon, illustration, 3d render, plastic skin, oversaturated, text, watermark, logo,
+extra fingers, distorted face, heavy makeup, harsh shadows.
+
+Midjourney suffix:  --ar 1:1 --style raw --v 7
+
+
+-----------------------------------------------------------------------------------------
+2) LIVE DEMO SCREENSHOT
+   Slide 9 "Let's test it"  ·  config key: demoScreenshot  ·  file: demo.png
+   Sits inside a browser frame — roughly 4:3 landscape.
+   TIP: a real screenshot of detailresume.com's analysis page will look best and is
+   more honest for a live demo. Use this prompt only as a stand-in.
+-----------------------------------------------------------------------------------------
+
+Prompt:
+Clean flat UI screenshot of a modern web app dashboard for resume analysis, white
+background with bright blue #0665FE accents, left panel shows an uploaded resume
+document preview, right panel shows a large circular "Match Score 91" gauge, a list of
+"Missing Keywords" as rounded pill tags (AWS, Docker, REST APIs), a "Weak Sections" card
+with a warning icon, and an "Improvement Suggestions" card with short text lines, Inter
+typeface, generous spacing, soft card shadows, SaaS product design, crisp, high
+resolution, straight-on view, no browser chrome, 4:3.
+
+Negative prompt:
+perspective tilt, laptop mockup, hands, blurry text, gibberish lorem, dark mode, clutter,
+neon, gradients everywhere.
+
+Midjourney suffix:  --ar 4:3 --style raw --v 7
+
+
+-----------------------------------------------------------------------------------------
+3) PRODUCT SCREENSHOT / HERO
+   Slide 12 "So we built DetailResume"  ·  config key: productScreenshot  ·  file: product.png
+   Shown at 760 × 430 on a deep-navy slide — 16:9 landscape.
+   TIP: again, a real product screenshot is best. Alternative prompt B gives a
+   photographic "in use" shot instead of a UI mock.
+-----------------------------------------------------------------------------------------
+
+Prompt A (UI mockup):
+Sleek product hero image of a resume builder web app shown on a thin-bezel laptop,
+floating at a slight three-quarter angle on a deep royal-blue #062A9E background, the
+screen shows a clean ATS-friendly resume on the left and an AI suggestions sidebar on the
+right with blue #0665FE highlights and a "Match score" badge, soft studio lighting, subtle
+reflections, minimal, premium SaaS marketing style, lots of negative space, 16:9.
+
+Prompt B (photographic):
+Realistic photo over the shoulder of an Indian university student sitting at a desk in a
+bright modern library, looking at a laptop screen that displays a clean resume-analysis
+web app with blue accents, notebook and coffee cup on the desk, natural window light,
+shallow depth of field focused on the screen, candid, authentic, cool blue tones, 16:9.
+
+Negative prompt:
+cluttered, dark, fake-looking text, watermark, logo of other brands, distorted hands.
+
+Midjourney suffix:  --ar 16:9 --style raw --v 7
+
+
+-----------------------------------------------------------------------------------------
+4) QR CODE — DONE: public/images/qr.png already points to https://www.detailresume.com
+   Slide 14 "Beat the ATS"  ·  config key: qrCode  ·  file: qr.png
+   Shown at 368 × 368 on a white card.
+-----------------------------------------------------------------------------------------
+
+Do NOT use an AI image generator for this — AI-made QR codes usually don't scan.
+Create it with any QR generator (e.g. your browser's "Create QR code for this page",
+qr-code-generator.com, or the `qrcode` npm package):
+  - URL: https://detailresume.com  (add UTM tags if you want to track scans,
+    e.g. ?utm_source=marwadi&utm_medium=talk)
+  - Foreground colour: #0A3FDF or black · Background: white
+  - Export as PNG at least 1000 × 1000 px with a small quiet-zone margin.
+  - Test it with two different phones before the talk.
+
+
+-----------------------------------------------------------------------------------------
+OPTIONAL EXTRAS (not wired into the deck yet — ask if you want slots for them)
+-----------------------------------------------------------------------------------------
+
+a) Audience / campus mood shot (e.g. for the "Years of work. Seconds of attention." slide):
+Realistic wide photo of Indian university students in a modern lecture hall looking
+toward a presenter, warm but slightly cool-graded light, candid, shallow depth of field,
+backs of heads in foreground, blue projector glow, editorial documentary style, 16:9.
+
+b) Recruiter skimming resumes (for "The problem" slide):
+Realistic close-up of a recruiter's hands holding a printed resume beside a laptop showing
+a list of candidate applications, office desk, soft daylight, shallow depth of field,
+muted neutral tones with a single blue accent, documentary photography, 16:9.
