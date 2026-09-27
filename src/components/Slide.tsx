@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import { deck } from '../deck.config'
 import { Logo } from './Logo'
-import { useSlideNumber } from './SlideContext'
+import { useSlideNumber, useSlideSize } from './SlideContext'
 
 export type SlideTheme = 'blue' | 'white' | 'slate' | 'navy' | 'charcoal'
 
@@ -29,13 +29,14 @@ type SlideProps = {
   className?: string
 }
 
-/** A fixed 1920×1080 canvas with the shared footer (logo · slide number · date). */
+/** A 1920×1080 canvas (stretched to the viewport's aspect ratio when fitted) with the shared footer (logo · slide number · date). */
 export function Slide({ theme = 'white', children, className = '' }: SlideProps) {
   const t = themes[theme]
   const number = useSlideNumber()
+  const { width, height } = useSlideSize()
 
   return (
-    <section className={`relative h-[1080px] w-[1920px] overflow-hidden ${t.bg} ${t.text}`}>
+    <section style={{ width, height }} className={`relative overflow-hidden ${t.bg} ${t.text}`}>
       <div className={`absolute inset-x-[96px] top-[96px] bottom-[150px] ${className}`}>{children}</div>
       <footer
         className={`absolute inset-x-[64px] bottom-[40px] flex items-center justify-between border-t pt-[24px] text-[20px] ${t.rule}`}

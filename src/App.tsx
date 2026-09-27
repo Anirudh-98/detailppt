@@ -19,6 +19,29 @@ function RenderSlide({ index }: { index: number }) {
 export default function App() {
   const [index, setIndex] = useState(indexFromHash)
   const [overview, setOverview] = useState(false)
+  // 'normal' keeps the 16:9 slide with bars; 'fill' stretches the slide to cover the whole window.
+  const [fill, setFill] = useState(() => {
+    try {
+      return localStorage.getItem('deck-view-mode') === 'fill'
+    } catch {
+      return false
+    }
+  })
+  const [isFullscreen, setIsFullscreen] = useState(false)
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('deck-view-mode', fill ? 'fill' : 'normal')
+    } catch {
+      // storage unavailable — mode just won't persist
+    }
+  }, [fill])
+
+  useEffect(() => {
+    const onChange = () => setIsFullscreen(!!document.fullscreenElement)
+    document.addEventListener('fullscreenchange', onChange)
+    return () => document.removeEventListener('fullscreenchange', onChange)
+  }, [])
 
   const go = useCallback((n: number) => setIndex(clamp(n)), [])
 
@@ -59,8 +82,11 @@ export default function App() {
           break
         case 'f':
         case 'F':
-          if (document.fullscreenElement) document.exitFullscreen()
-          else document.documentElement.requestFullscreen()
+          toggleFullscreen()
+          break
+        case 'm':
+        case 'M':
+          setFill((f) => !f)
           break
       }
     }
@@ -122,7 +148,7 @@ export default function App() {
           </div>
         ) : (
           <div className="group relative h-full touch-pan-y">
-            <Fit className="h-full w-full">
+            <Fit className="h-full w-full" fill={fill}>
               <RenderSlide index={index} />
             </Fit>
 
@@ -139,6 +165,19 @@ export default function App() {
               <NavButton label="Overview (G)" onClick={() => setOverview(true)}>
                 ▦
               </NavButton>
+              <span className="mx-[4px] h-[20px] w-px bg-white/25" />
+              <ModeButton active={!fill} label="Normal 16:9 view (M)" onClick={() => setFill(false)}>
+                Normal
+              </ModeButton>
+              <ModeButton active={fill} label="Fill the screen (M)" onClick={() => setFill(true)}>
+                Fill
+              </ModeButton>
+              <NavButton
+                label={isFullscreen ? 'Exit full screen (F)' : 'Full screen (F)'}
+                onClick={toggleFullscreen}
+              >
+                {isFullscreen ? '⤡' : '⤢'}
+              </NavButton>
             </nav>
           </div>
         )}
@@ -153,6 +192,35 @@ export default function App() {
         ))}
       </div>
     </>
+  )
+}
+
+function toggleFullscreen() {
+  if (document.fullscreenElement) document.exitFullscreen()
+  else document.documentElement.requestFullscreen()
+}
+
+function ModeButton({
+  active,
+  label,
+  onClick,
+  children,
+}: {
+  active: boolean
+  label: string
+  onClick: () => void
+  children: string
+}) {
+  return (
+    <button
+      title={label}
+      aria-label={label}
+      aria-pressed={active}
+      onClick={onClick}
+      className={`h-[32px] rounded-full px-[12px] ${active ? 'bg-white text-black' : 'hover:bg-white/15'}`}
+    >
+      {children}
+    </button>
   )
 }
 
