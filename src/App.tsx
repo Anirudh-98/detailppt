@@ -72,6 +72,29 @@ export default function App() {
     }
   }, [])
 
+  // Touch: swipe left → next slide, swipe right → previous (disabled in overview so the grid can scroll).
+  useEffect(() => {
+    if (overview) return
+    let startX = 0
+    let startY = 0
+    const onStart = (e: TouchEvent) => {
+      startX = e.touches[0].clientX
+      startY = e.touches[0].clientY
+    }
+    const onEnd = (e: TouchEvent) => {
+      const dx = e.changedTouches[0].clientX - startX
+      const dy = e.changedTouches[0].clientY - startY
+      if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy)) return
+      setIndex((i) => clamp(dx < 0 ? i + 1 : i - 1))
+    }
+    window.addEventListener('touchstart', onStart, { passive: true })
+    window.addEventListener('touchend', onEnd, { passive: true })
+    return () => {
+      window.removeEventListener('touchstart', onStart)
+      window.removeEventListener('touchend', onEnd)
+    }
+  }, [overview])
+
   return (
     <>
       {/* Presenter view */}
@@ -98,12 +121,12 @@ export default function App() {
             </div>
           </div>
         ) : (
-          <div className="group relative h-full">
+          <div className="group relative h-full touch-pan-y">
             <Fit className="h-full w-full">
               <RenderSlide index={index} />
             </Fit>
 
-            <nav className="absolute bottom-[16px] left-1/2 flex -translate-x-1/2 items-center gap-[4px] rounded-full bg-black/70 px-[8px] py-[6px] text-[14px] text-white opacity-0 backdrop-blur transition group-hover:opacity-100">
+            <nav className="absolute bottom-[16px] left-1/2 flex -translate-x-1/2 items-center gap-[4px] rounded-full bg-black/70 px-[8px] py-[6px] text-[14px] text-white opacity-0 backdrop-blur transition group-hover:opacity-100 [@media(hover:none)]:opacity-100">
               <NavButton label="Previous (←)" onClick={() => go(index - 1)}>
                 ←
               </NavButton>
