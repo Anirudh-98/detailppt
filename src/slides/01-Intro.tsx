@@ -5,7 +5,7 @@ export default function Intro() {
   return (
     <Slide theme="blue" className="flex flex-col">
       <Eyebrow>Welcome To DetailResume</Eyebrow>
-      <h1 className="mt-[36px] text-[190px] leading-[0.92] tracking-[-0.05em]">Hi, Guys</h1>
+      <h1 className="mt-[36px] text-[190px] leading-[0.92] tracking-[-0.05em]">Hi, Everyone!!</h1>
 
       <div className="mt-auto grid grid-cols-[1fr_1.2fr] gap-[96px] border-t border-white/25 pt-[40px]">
         <div>
