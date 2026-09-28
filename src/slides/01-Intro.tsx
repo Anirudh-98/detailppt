@@ -4,13 +4,8 @@ import { Eyebrow } from '../components/Eyebrow'
 export default function Intro() {
   return (
     <Slide theme="blue" className="flex flex-col">
-      <Eyebrow>Founder — DetailResume</Eyebrow>
-      <h1 className="mt-[36px] text-[190px] leading-[0.92] tracking-[-0.05em]">Hi, I'm Anirudh.</h1>
-      <p className="mt-[44px] text-[38px] font-medium">Cybersecurity Professional · Product Builder</p>
-      <p className="mt-[12px] max-w-[1100px] text-[30px] leading-snug text-white/80">
-        I work at the intersection of{' '}
-        <span className="text-white">technology, cybersecurity, and AI-powered products.</span>
-      </p>
+      <Eyebrow>Welcome To DetailResume</Eyebrow>
+      <h1 className="mt-[36px] text-[190px] leading-[0.92] tracking-[-0.05em]">Hi,</h1>
 
       <div className="mt-auto grid grid-cols-[1fr_1.2fr] gap-[96px] border-t border-white/25 pt-[40px]">
         <div>
